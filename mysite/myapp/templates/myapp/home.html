@@ -1,0 +1,29 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+    <h3>Popular Items</h3>
+    
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Make</th>
+          <th scope="col">Item Name</th>
+          <th scope="col">Units Sold</th>
+          <th scope="col">Customer Score</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for q_sum in q_sums %}
+      
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ q_sum.item_ID__manuf_ID__manuf_name }}</td>
+          <td>{{ q_sum.item_ID__item_name }}</td>
+          <td>{{ q_sum.total_quantity }}</td>
+          <td></td>
+        </tr>
+      
+      {% endfor %}
+    </tbody>
+    </table>
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends "myapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h3>Ticket ID: </h3>
+<div class="container">
+<nav class="navbar navbar-light bg-light">
+  <form class="form-inline justify-content-end" method="POST">
+    <a class="btn btn-success btn-sm mr-sm-2 add-cust-btn" href="{% url 'customer-create' %}">+</a>
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Customers" aria-label="Search" name="search_customer" action="">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+
+<form method="POST">
+  {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Create Sale</legend>
+        {{ sale_form|crispy }}
+    </fieldset>
+    <div class="form-group">
+      <button type="button" class="btn btn-danger mr-sm-2">Cancel</button>
+      <button type="submit" class="btn btn-success mr-sm-2">Check Out</button>
+    </div>
+</form>
+{{ sale_form.media }}
+
+<br><br>
+<h3>Transaction</h3>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Make</th>
+        <th scope="col">Item</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>{{ sales.item_ID__manuf_ID__manuf_name }}</td>
+            <td>{{ sales.item_ID__item_name }}</td>
+            <td>x{{ sales.quantity }}</td>
+            <td>${{ sales.item_ID__item_cost }}</td>
+            <td>${{ sales.total_cost }}</td>
+        </tr>
+        <br><br>
+    </tbody>
+</table>
+<br><br>
+</div>
+{% endblock content %}
+{% block col2 %}
+  <h3>Item Lookup</h3>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Inventory" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+  <div class="container">
+      {% for stock in stocks %}
+        <button type="submit" class="btn btn-outline-success btn-lg" style="padding: 10px; margin:7px; height: 175px; width: 175px; font-size: medium; color: black">
+          {{ stock.item_name }} 
+          <br>
+          {{ stock.manuf_ID }}
+          <br>
+          ${{ stock.item_cost }}
+          <br>
+          In-stock: {{ stock.item_quantity }}
+          <br>
+          ID: {{ stock.item_ID }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

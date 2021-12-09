@@ -1,0 +1,32 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+    
+    <h3>Submitted Orders</h3>
+    
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Order #</th>
+          <th scope="col">Item Name</th>
+          <th scope="col">Date Purchased</th>
+          <th scope="col">Purchased By</th>
+          <th scope="col">Order Quantity</th>
+          <th scope="col">Total Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for order in orders %}
+        <tr>
+            <th scope="row">{{ order.order_ID }}</th>
+            <td>{{ order.item_ID }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.employee_ID }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.order_cost }}</td>
+            <td></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}

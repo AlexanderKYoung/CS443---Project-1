@@ -1,0 +1,32 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+    
+    <h3>Current Inventory</h3>
+    
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Item #</th>
+          <th scope="col">Manufacturer</th>
+          <th scope="col">Item Name</th>
+          <th scope="col">Model #</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for item in stocks %}
+        <tr>
+            <th scope="row">{{ item.item_ID }}</th>
+            <td>{{ item.manuf_ID }}</td>
+            <td>{{ item.item_name }}</td>
+            <td>{{ item.item_model }}</td>
+            <td>{{ item.item_quantity }}</td>
+            <td>{{ item.item_cost }}</td>
+            <td></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}

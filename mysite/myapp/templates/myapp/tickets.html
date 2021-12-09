@@ -1,0 +1,30 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+    
+    <h3>Past Sales Tickets</h3>
+    
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Ticket #</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Date Purchased</th>
+          <th scope="col">Checked Out By</th>
+          <th scope="col">Total Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for sale in sales %}
+        <tr>
+            <th scope="row">{{ sale.sale_ID }}</th>
+            <td>{{ sale.customer_ID }}</td>
+            <td>{{ sale.date }}</td>
+            <td>{{ sale.employee_ID }}</td>
+            <td>{{ sale.total_cost }}</td>
+            <td></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}

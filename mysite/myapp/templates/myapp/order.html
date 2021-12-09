@@ -1,0 +1,38 @@
+{% extends "myapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Make an Order</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+{% block col2 %}
+  <h3>Item Lookup</h3>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Inventory" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+  <div class="container">
+      {% for stock in stocks %}
+        <button type="submit" class="btn btn-outline-success btn-lg" style="padding: 10px; margin:7px; height: 150px; width: 150px; font-size: medium; color: black">
+          {{ stock.item_name }} 
+          
+          <br>
+          {{ stock.manuf_ID }}
+          <br>
+          ${{ stock.item_cost }}
+          <br>
+          ID: {{ stock.item_ID }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
